@@ -1,7 +1,9 @@
-import { FETCH_USERS_FAILURE, FETCH_USERS_SUCCESS, FETCH_USERS_REQUEST} from "./userTypes";
-const axios = require('axios')
-
-
+import {
+  FETCH_USERS_FAILURE,
+  FETCH_USERS_SUCCESS,
+  FETCH_USERS_REQUEST,
+} from "./userTypes";
+const axios = require("axios");
 
 //loading data
 export const fetchUserRequest = () => {
@@ -24,16 +26,20 @@ export const fetchUserFailure = (error) => {
   };
 };
 
-export const fetchAllUsers = () =>{
-  return (/*dispatch*/) =>{
-    axios.get(`https://fakestoreapi.com/users`)
-    .then(res =>{
-      const users = res
-      console.log(users)
-    })
-    .catch((error) =>{
-      const errorMessage = error.message
-      console.log(errorMessage)
-    })
-  }
-}
+export const fetchAllUsers = () => {
+  return (dispatch) => {
+    dispatch(fetchUserRequest);
+    axios
+      .get(`https://fakestoreapi.com/users`)
+      .then((res) => {
+        const users = res.data;
+        dispatch(fetchUserSuccess(users));
+        console.log(users);
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        dispatch(fetchUserFailure(errorMessage));
+        console.log(errorMessage);
+      });
+  };
+};
