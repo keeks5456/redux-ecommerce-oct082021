@@ -7,20 +7,20 @@ import {
 const axios = require("axios");
 
 //loading data
-export const fetchProductsRequest = () => {
+export const fetchProductRequest = () => {
   return {
     type: FETCH_PRODUCTS_REQUEST,
   };
 };
 
-export const fetchProductsSuccess = (data) => {
+export const fetchProductSuccess = (data) => {
   return {
     type: FETCH_PRODUCTS_SUCCESS,
     payload: data,
   };
 };
 
-export const fetchProductsFailure = (error) => {
+export const fetchProductFailure = (error) => {
   return {
     type: FETCH_PRODUCTS_FAILURE,
     payload: error,
@@ -29,17 +29,17 @@ export const fetchProductsFailure = (error) => {
 
 export const fetchAllProducts = () => {
   return (dispatch) => {
-    dispatch(fetchProductsRequest);
+    dispatch(fetchProductRequest);
     axios
       .get(`https://fakestoreapi.com/products`)
       .then((res) => {
         const products = res.data;
-        dispatch(fetchProductsSuccess(products));
+        dispatch(fetchProductSuccess(products));
         console.log(products);
       })
       .catch((error) => {
         const errorMessage = error.message;
-        dispatch(fetchProductsFailure(errorMessage));
+        dispatch(fetchProductFailure(errorMessage));
         console.log(errorMessage);
       });
   };
