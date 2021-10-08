@@ -2,8 +2,13 @@
 import { fetchAllUsers } from "./Redux/User/userActions";
 import { fetchAllProducts } from "./Redux/Products/productActions";
 import { fetchAllCarts } from "./Redux/Cart/cartActions";
-
+//redux
 import { useSelector, useDispatch } from "react-redux";
+
+//components
+import ProductContainer from "./Components/ProductContainer";
+
+
 function App() {
   const dispatch = useDispatch();
 
@@ -11,19 +16,21 @@ function App() {
   const products = useSelector((state) => state.products);
   const carts = useSelector((state) => state.carts);
 
-  console.log(users);
-  console.log(products);
-
   return (
     <div>
+    <ProductContainer />
+    </div>
+  );
+}
+
+export default App;
+
+
+/*
       <button onClick={() => dispatch(fetchAllProducts(products))}>
         products
       </button>
       <button onClick={() => dispatch(fetchAllUsers(users))}>Users</button>
       <button onClick={() => dispatch(fetchAllCarts(carts))}>Carts</button>
 
-    </div>
-  );
-}
-
-export default App;
+*/
