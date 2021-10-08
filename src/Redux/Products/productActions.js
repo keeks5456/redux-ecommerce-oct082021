@@ -35,7 +35,6 @@ export const fetchAllProducts = () => {
       .then((res) => {
         const products = res.data;
         dispatch(fetchProductSuccess(products));
-        console.log(products);
       })
       .catch((error) => {
         const errorMessage = error.message;
