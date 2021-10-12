@@ -4,25 +4,29 @@ import ProductCard from "./ProductCard";
 import { useEffect } from "react";
 
 const ProductContainer = ({ productData, fetchAllProducts }) => {
+  
   useEffect(() => {
     fetchAllProducts();
   }, []);
 
-  console.log(productData.products);
   return productData.loading ? (
     <h2>Loading... </h2>
   ) : productData.error ? (
     <p>{productData.error}</p>
   ) : (
     <div>
-    <ProductCard  />
+    {productData.products && productData.products.map((product)=>(
+      <ProductCard key={product.id} products={product}/>
+    ))}
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
+  console.log(state)
   return {
     productData: state.products,
+    cartData: state.carts
   };
 };
 

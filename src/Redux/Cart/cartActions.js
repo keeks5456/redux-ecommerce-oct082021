@@ -2,6 +2,7 @@ import {
   FETCH_CARTS_SUCCESS,
   FETCH_CARTS_FAILURE,
   FETCH_CARTS_REQUEST,
+  ADD_TO_CART
 } from "./cartTypes";
 
 const axios = require("axios");
@@ -26,6 +27,14 @@ export const fetchCartFailure = (error) => {
     payload: error,
   };
 };
+
+export const addToCart = (item) =>{
+  return {
+    type: ADD_TO_CART,
+    payload: item
+
+  }
+}
 
 export const fetchAllCarts = () => {
   return (dispatch) => {

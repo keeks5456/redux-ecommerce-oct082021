@@ -26,6 +26,11 @@ export const fetchUserFailure = (error) => {
   };
 };
 
+
+
+
+//users action creators
+
 export const fetchAllUsers = () => {
   return (dispatch) => {
     dispatch(fetchUserRequest);

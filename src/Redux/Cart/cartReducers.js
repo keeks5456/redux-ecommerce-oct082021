@@ -14,7 +14,7 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        users: action.payload,
+        carts: action.payload,
       };
     case "FETCH_CARTS_FAILURE":
       return {
@@ -22,6 +22,11 @@ const cartReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload,
       };
+    case "ADD_TO_CART":
+      return {
+        ...state,
+        carts: [...state.carts, action.payload]
+      }
     default:
       return state;
   }
