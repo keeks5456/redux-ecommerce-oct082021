@@ -1,22 +1,25 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { fetchAllProducts } from "../Redux/Products/productActions";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchAllProducts, addProductToCart } from "../Redux/Products/productActions";
 import { useEffect, useState } from "react";
 
 //styles
 import { Card, Image } from "../Styled-Component/productCardStyles";
-import { addToCart } from "../Redux/Cart/cartActions";
 
 const ProductCard = ({ products }) => {
+  const dispatch = useDispatch()
   const [toggleDetails, setToggleDetails] = useState(false);
-  const product = useSelector((state) => state.products);
-  const carts = useSelector((state) => state.carts)
+
   useEffect(() => {
     fetchAllProducts();
   }, []);
 
-  console.log(console.log(toggleDetails));
+  const addToCart = (product) =>{
+    dispatch(addProductToCart(product))
+  }
+
   return (
+    <>
     <Card>
       <h4>{products.title}</h4>
       <Image src={products.image} alt={products.title}></Image>
@@ -25,11 +28,15 @@ const ProductCard = ({ products }) => {
       <button onClick={() => setToggleDetails(!toggleDetails)}>
         See Details
       </button>
-      <button onClick={() => addToCart()}>Add To Cart</button>
-
+      <button onClick={() => addToCart(products)}>Add To Cart</button>
     </Card>
+
+
+</>
   );
 };
+
+
 
 export default ProductCard;
 

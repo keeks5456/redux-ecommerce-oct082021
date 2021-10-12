@@ -1,12 +1,12 @@
-import { fetchAllCarts } from "../Redux/Cart/cartActions";
-import { connect } from "react-redux";
+import { addToCart } from "../Redux/Cart/cartActions";
+
+import { connect, useSelector } from "react-redux";
 import { useEffect } from "react";
 
 const CartContainer = ({cartData, fetchAllCarts}) => {
 
-  // useEffect(() =>{
-  //   fetchAllCarts()
-  // },[])
+const items = useSelector(state => state.items)
+
   
   return (
     <div>
@@ -15,17 +15,17 @@ const CartContainer = ({cartData, fetchAllCarts}) => {
   )
 }
 
-// const mapStateToProps = (state) =>{
-//   return {
-//     cartData: state.carts
-//   }
-// }
+const mapStateToProps = (state) =>{
+  console.log(state.carts, state.products)
+  return {
+    itemsData: state.items,
+  }
+}
 
-// const mapDispatchToProps = (dispatch) =>{
-//   return {
-//     fetchAllCarts: () => dispatch(fetchAllCarts())
-//   }
-// }
-export default CartContainer
+const mapDispatchToProps = (dispatch) =>{
+  return {
+    addToCart: () => dispatch(addToCart())
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(CartContainer)
 
-//connect(mapStateToProps, mapDispatchToProps)

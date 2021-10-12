@@ -28,28 +28,28 @@ export const fetchCartFailure = (error) => {
   };
 };
 
-export const addToCart = (item) =>{
+export const addToCart = (data) =>{
   return {
     type: ADD_TO_CART,
-    payload: item
+    payload: data
 
   }
 }
 
-export const fetchAllCarts = () => {
-  return (dispatch) => {
-    dispatch(fetchCartRequest);
-    axios
-      .get(`https://fakestoreapi.com/carts`)
-      .then((res) => {
-        const carts = res.data;
-        dispatch(fetchCartSuccess(carts));
-        console.log(carts);
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        dispatch(fetchCartFailure(errorMessage));
-        console.log(errorMessage);
-      });
-  };
-};
+// export const fetchAllCarts = () => {
+//   return (dispatch) => {
+//     dispatch(fetchCartRequest);
+//     axios
+//       .get(`https://fakestoreapi.com/carts`)
+//       .then((res) => {
+//         const carts = res.data;
+//         dispatch(fetchCartSuccess(carts));
+//         console.log(carts);
+//       })
+//       .catch((error) => {
+//         const errorMessage = error.message;
+//         dispatch(fetchCartFailure(errorMessage));
+//         console.log(errorMessage);
+//       });
+//   };
+// };

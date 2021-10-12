@@ -1,14 +1,15 @@
-import { fetchAllProducts } from "../Redux/Products/productActions";
 import { connect } from "react-redux";
-import ProductCard from "./ProductCard";
 import { useEffect } from "react";
+import { fetchAllProducts } from "../Redux/Products/productActions";
+import ProductCard from "./ProductCard";
 
-const ProductContainer = ({ productData, fetchAllProducts }) => {
+const ProductContainer = ({ productData, cartData, fetchAllProducts }) => {
   
   useEffect(() => {
     fetchAllProducts();
   }, []);
 
+  console.log(cartData[0])
   return productData.loading ? (
     <h2>Loading... </h2>
   ) : productData.error ? (
@@ -16,18 +17,23 @@ const ProductContainer = ({ productData, fetchAllProducts }) => {
   ) : (
     <div>
     {productData.products && productData.products.map((product)=>(
-      <ProductCard key={product.id} products={product}/>
+      <ProductCard key={product.id} products={product} cartItem={cartData}/>
     ))}
+
+   {cartData.map((cart) =>{
+     <p>{console.log(cart)}</p>
+   })}
     </div>
   );
 };
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     productData: state.products,
-    cartData: state.carts
+    cartData: state.products.cart
+
   };
+
 };
 
 const mapDispatchToProps = (dispatch) => {

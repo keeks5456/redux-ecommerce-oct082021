@@ -15,13 +15,12 @@ function App() {
 
   // const users = useSelector((state) => state.users);
   // const products = useSelector((state) => state.products);
-  const carts = useSelector((state) => state.carts);
+  // const carts = useSelector((state) => state.carts);
 
   return (
     <div>
     <ProductContainer />
-      <CartContainer />
-      
+    
     </div>
     );
   }
@@ -30,7 +29,8 @@ function App() {
   
   
   /*
-      <button onClick={() => dispatch(fetchAllProducts(products))}>
+  <CartContainer />
+  <button onClick={() => dispatch(fetchAllProducts(products))}>
         products
       </button>
       <button onClick={() => dispatch(fetchAllUsers(users))}>Users</button>
