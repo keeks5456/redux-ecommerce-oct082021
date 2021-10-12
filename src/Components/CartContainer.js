@@ -1,31 +1,37 @@
-import { addToCart } from "../Redux/Cart/cartActions";
-
 import { connect, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useState } from "react";
+import { Card, Image } from "../Styled-Component/productCardStyles";
 
-const CartContainer = ({cartData, fetchAllCarts}) => {
+const CartContainer = () => {
+const products = useSelector(state => state.products)
+const items = useSelector(state => state.products.cart)
+const [toggleDetails, setToggleDetails] = useState(false);
 
-const items = useSelector(state => state.items)
-
-  
+console.log(items, products)
   return (
     <div>
-      
+      {items.map((item) =>{
+        <Card>
+        <h4>{item.title}</h4>
+        <Image src={item.image} alt={item.title}></Image>
+        <p>{item.price}</p>
+        {toggleDetails ? <p>{item.description}</p> : null}
+        <button onClick={() => setToggleDetails(!toggleDetails)}>
+          See Details
+        </button>
+      </Card>
+      })}
     </div>
   )
 }
 
-const mapStateToProps = (state) =>{
-  console.log(state.carts, state.products)
-  return {
-    itemsData: state.items,
-  }
-}
+// const mapStateToProps = state =>{
+//   return {
+//     productsData: state.productsData
 
-const mapDispatchToProps = (dispatch) =>{
-  return {
-    addToCart: () => dispatch(addToCart())
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(CartContainer)
+//   }
+// }
+
+
+export default connect()(CartContainer)
 

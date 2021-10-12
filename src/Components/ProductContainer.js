@@ -9,7 +9,6 @@ const ProductContainer = ({ productData, cartData, fetchAllProducts }) => {
     fetchAllProducts();
   }, []);
 
-  console.log(cartData[0])
   return productData.loading ? (
     <h2>Loading... </h2>
   ) : productData.error ? (
@@ -19,10 +18,6 @@ const ProductContainer = ({ productData, cartData, fetchAllProducts }) => {
     {productData.products && productData.products.map((product)=>(
       <ProductCard key={product.id} products={product} cartItem={cartData}/>
     ))}
-
-   {cartData.map((cart) =>{
-     <p>{console.log(cart)}</p>
-   })}
     </div>
   );
 };

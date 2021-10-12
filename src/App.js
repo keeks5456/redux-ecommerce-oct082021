@@ -1,8 +1,3 @@
-//actions
-// import { fetchAllUsers } from "./Redux/User/userActions";
-// import { fetchAllProducts } from "./Redux/Products/productActions";
-// import { fetchAllCarts } from "./Redux/Cart/cartActions";
-
 //redux
 import { useSelector, useDispatch } from "react-redux";
 
@@ -10,26 +5,27 @@ import { useSelector, useDispatch } from "react-redux";
 import ProductContainer from "./Components/ProductContainer";
 import CartContainer from "./Components/CartContainer";
 
+//routes
+import { Route, Switch } from "react-router";
+
 function App() {
   const dispatch = useDispatch();
 
-  // const users = useSelector((state) => state.users);
-  // const products = useSelector((state) => state.products);
-  // const carts = useSelector((state) => state.carts);
-
   return (
-    <div>
-    <ProductContainer />
-    
-    </div>
-    );
-  }
-  
-  export default App;
-  
-  
-  /*
-  <CartContainer />
+    <Switch>
+      <Route path="/" component={ProductContainer}>
+        <ProductContainer />
+      </Route>
+      <Route path="/cart" component={CartContainer}>
+      <CartContainer />
+      </Route>
+    </Switch>
+  );
+}
+
+export default App;
+
+/*
   <button onClick={() => dispatch(fetchAllProducts(products))}>
         products
       </button>
