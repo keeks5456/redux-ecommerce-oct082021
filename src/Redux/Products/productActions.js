@@ -2,6 +2,7 @@ import {
   FETCH_PRODUCTS_FAILURE,
   FETCH_PRODUCTS_REQUEST,
   FETCH_PRODUCTS_SUCCESS,
+  ADD_PRODUCT_TO_CART
 } from "./productTypes";
 
 const axios = require("axios");
@@ -26,6 +27,13 @@ export const fetchProductFailure = (error) => {
     payload: error,
   };
 };
+
+export const addProductToCart = (data) =>{
+  return {
+    type: ADD_PRODUCT_TO_CART,
+    payload: data
+  }
+}
 
 export const fetchAllProducts = () => {
   return (dispatch) => {

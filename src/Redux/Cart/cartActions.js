@@ -2,6 +2,7 @@ import {
   FETCH_CARTS_SUCCESS,
   FETCH_CARTS_FAILURE,
   FETCH_CARTS_REQUEST,
+  ADD_TO_CART
 } from "./cartTypes";
 
 const axios = require("axios");
@@ -27,20 +28,28 @@ export const fetchCartFailure = (error) => {
   };
 };
 
-export const fetchAllCarts = () => {
-  return (dispatch) => {
-    dispatch(fetchCartRequest);
-    axios
-      .get(`https://fakestoreapi.com/carts`)
-      .then((res) => {
-        const carts = res.data;
-        dispatch(fetchCartSuccess(carts));
-        console.log(carts);
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        dispatch(fetchCartFailure(errorMessage));
-        console.log(errorMessage);
-      });
-  };
-};
+export const addToCart = (data) =>{
+  return {
+    type: ADD_TO_CART,
+    payload: data
+
+  }
+}
+
+// export const fetchAllCarts = () => {
+//   return (dispatch) => {
+//     dispatch(fetchCartRequest);
+//     axios
+//       .get(`https://fakestoreapi.com/carts`)
+//       .then((res) => {
+//         const carts = res.data;
+//         dispatch(fetchCartSuccess(carts));
+//         console.log(carts);
+//       })
+//       .catch((error) => {
+//         const errorMessage = error.message;
+//         dispatch(fetchCartFailure(errorMessage));
+//         console.log(errorMessage);
+//       });
+//   };
+// };

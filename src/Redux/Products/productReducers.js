@@ -1,6 +1,8 @@
+
 const initialState = {
   loading: false,
   products: [],
+  cart: [],
   error: "",
 };
 
@@ -22,6 +24,11 @@ const productReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload,
       };
+    case "ADD_PRODUCT_TO_CART":
+      return {
+        ...state,
+        cart:[...state.cart, action.payload]
+      }
     default:
       return state;
   }

@@ -1,29 +1,40 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAllProducts } from "../Redux/Products/productActions";
-import { useEffect } from "react";
+import {
+  fetchAllProducts,
+  addProductToCart,
+} from "../Redux/Products/productActions";
+import { useEffect, useState } from "react";
+import { connect } from "react-redux";
 
-const ProductCard = () => {
-  
-  const product = useSelector((state) => state.products);
+//styles
+import { Card, Image } from "../Styled-Component/productCardStyles";
+
+const ProductCard = ({ products, addProductToCart }) => {
+  const [toggleDetails, setToggleDetails] = useState(false);
+
   useEffect(() => {
     fetchAllProducts();
   }, []);
 
-
-  console.log(product.products);
   return (
-    <div>
-    {product.products && product.products.map((p) =>(
-      <div key={p.id}>
-        <h2>{p.title}</h2>
-        <img src={p.image} alt={p.title}></img>
-        <p>{p.price}</p>
-        <p>{p.description}</p>
-      </div>
-    ))}
-    </div>
+    <Card>
+      <h4>{products.title}</h4>
+      <Image src={products.image} alt={products.title}></Image>
+      <p>{products.price}</p>
+      {toggleDetails ? <p>{products.description}</p> : null}
+      <button onClick={() => setToggleDetails(!toggleDetails)}>
+        See Details
+      </button>
+      <button onClick={() => addProductToCart(products)}>Add To Cart</button>
+    </Card>
   );
 };
 
-export default ProductCard;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addProductToCart: products => dispatch(addProductToCart(products)),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(ProductCard);

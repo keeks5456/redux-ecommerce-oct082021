@@ -1,8 +1,20 @@
 const initialState = {
   loading: false,
-  carts: [],
+  items: [],
   error: "",
 };
+
+const updateCartArray = (array, action )=>{
+  return array.map((item, index) =>{
+    if(index !== action.payload){
+      return item
+    }
+    return {
+      ...item,
+      inBasket: true
+    }
+  })
+}
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -14,7 +26,7 @@ const cartReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        users: action.payload,
+        items: action.payload,
       };
     case "FETCH_CARTS_FAILURE":
       return {
@@ -22,6 +34,12 @@ const cartReducer = (state = initialState, action) => {
         loading: false,
         error: action.payload,
       };
+    case "ADD_TO_CART":
+      return {
+        ...state,
+        items: updateCartArray(state.items, action)
+      };
+
     default:
       return state;
   }
