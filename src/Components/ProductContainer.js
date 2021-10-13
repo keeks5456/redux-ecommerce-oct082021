@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import { useEffect } from "react";
 import { fetchAllProducts } from "../Redux/Products/productActions";
 import ProductCard from "./ProductCard";
+import { Container } from "../Styled-Component/productCardStyles";
 
 const ProductContainer = ({ productData, cartData, fetchAllProducts }) => {
   
@@ -14,11 +15,11 @@ const ProductContainer = ({ productData, cartData, fetchAllProducts }) => {
   ) : productData.error ? (
     <p>{productData.error}</p>
   ) : (
-    <div>
+    <Container>
     {productData.products && productData.products.map((product)=>(
       <ProductCard key={product.id} products={product} cartItem={cartData}/>
     ))}
-    </div>
+    </Container>
   );
 };
 

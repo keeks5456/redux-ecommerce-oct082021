@@ -2,7 +2,8 @@ import {
   FETCH_PRODUCTS_FAILURE,
   FETCH_PRODUCTS_REQUEST,
   FETCH_PRODUCTS_SUCCESS,
-  ADD_PRODUCT_TO_CART
+  ADD_PRODUCT_TO_CART,
+  REMOVE_PRODUCT_FROM_CART
 } from "./productTypes";
 
 const axios = require("axios");
@@ -31,6 +32,13 @@ export const fetchProductFailure = (error) => {
 export const addProductToCart = (data) =>{
   return {
     type: ADD_PRODUCT_TO_CART,
+    payload: data
+  }
+}
+
+export const removeProductFromCart = (data) =>{
+  return {
+    type: REMOVE_PRODUCT_FROM_CART,
     payload: data
   }
 }

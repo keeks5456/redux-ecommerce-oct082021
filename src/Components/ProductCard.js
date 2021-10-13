@@ -33,7 +33,7 @@ const ProductCard = ({ products, addProductToCart }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addProductToCart: products => dispatch(addProductToCart(products)),
+    addProductToCart: (products) => dispatch(addProductToCart(products)),
   };
 };
 
